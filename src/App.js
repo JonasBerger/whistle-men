@@ -2,29 +2,32 @@ import React, { Component } from 'react';
 import './App.css';
 import VideoPlayer from './components/VideoPlayer'
 import MessageBanner from './components/MessageBanner'
+import Timer from './components/Timer'
 
 class App extends Component {
 
   constructor(props){
     super(props)
-    this.state= {isVisible: true, push: {commit: {author: {login: ''}}}}
+    this.state= {isVisible: true, changedProjects: []}
     this.resetVideo = this.resetVideo.bind(this)
+    this.doUpdate = this.doUpdate.bind(this)
   }
 
   resetVideo() {
     this.setState({isVisible: false})
   }
 
-  componentDidMount(){
-    fetch('https://api.github.com/repos/JonasBerger/whistle-men/branches/master?access_token=b79ff3ed15c4f468f02d845993fde65b3ae8bb11')
-      .then(res => res.json()).then(res => {this.setState({push: res})})
+  doUpdate(changedProjects) {
+    console.log(changedProjects)
+    this.setState({changedProjects})
   }
 
   render() {
     return (
       <div className="App">
-        <MessageBanner push={this.state.push} />
+        <Timer doUpdate={this.doUpdate} />
         <VideoPlayer 
+            projects={this.state.changedProjects}
             isVisible={this.state.isVisible} 
             videoFinished={this.resetVideo}
           />

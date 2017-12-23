@@ -8,9 +8,21 @@ export default class VideoPlayer extends React.Component {
 	}
 
 	componentDidMount(){
-		this.shuffleVideos()
-		this.refs.video.play()
+		//this.shuffleVideos()
+		//this.refs.video.play()
 	}
+
+	createPlaylistWithProject(){
+		if(this.props.projects.length){
+			const playlistWithInfo = this.props.projects.map(project => ({source: this.shuffleVideos(), project}))
+			this.props.updateMessage(playlistWithInfo)
+		}
+	}
+
+	videoFinished(){
+		this.props.videoFinished()
+	}
+
 
 	shuffleVideos(){
 		const randomVideo = Math.floor(Math.random() * config.numberOfVideos) + 1
@@ -21,7 +33,7 @@ export default class VideoPlayer extends React.Component {
 		if(!this.props.isVisible){
 			return null
 		}
-		return <video ref="video" onEnded={this.props.videoFinished} width="100%">
+		return <video ref="video" onEnded={this.videoFinished} width="100%">
 				  <source src={this.state.source} type="video/mp4"/>
 				  Your browser does not support the video tag.
 			</video>
