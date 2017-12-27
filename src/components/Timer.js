@@ -6,12 +6,12 @@ export default class Timer extends React.Component {
 
 	constructor(props){
 		super(props)
-		this.state = {projects: []}
+		this.state = {projects: [{commit: {sha: ''}}]}
 	}
 
 	componentDidMount(){
 		const projectUrls = buildFetchUrls()
-		setInterval(() => this.onUpdate(projectUrls), config.interval*1000*60)
+		setInterval(() => this.onUpdate(projectUrls), config.interval*10000)
 	}
 
 	onUpdate(projectUrls){
@@ -20,25 +20,21 @@ export default class Timer extends React.Component {
 	    	const changedProjects = this.getChanges(res)
 	    	if(changedProjects.length){
 	    		this.props.doUpdate(changedProjects)
+	    		this.setState({projects: changedProjects})
 	    	}
 		}))
 	}
 
 	getChanges(projects){
 		if(!projects.length){
-			    console.log(projects)
 			return
 		}
-		return projects.filter((project, index) =>(
-			project.commit.sha === this.state.projects[index]
-		))
-	}
-
-	stopUpdate(timer) {
-    	clearInterval(timer);
+		return projects.filter((project, index) =>{
+			return project.commit.sha !== this.state.projects[index].commit.sha
+		})
 	}
 
 	render(){
-		return <div></div>
+		return null
 	}
 }

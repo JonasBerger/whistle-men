@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
 import VideoPlayer from './components/VideoPlayer'
-import MessageBanner from './components/MessageBanner'
 import Timer from './components/Timer'
 
 class App extends Component {
@@ -9,17 +8,17 @@ class App extends Component {
   constructor(props){
     super(props)
     this.state= {isVisible: true, changedProjects: []}
-    this.resetVideo = this.resetVideo.bind(this)
     this.doUpdate = this.doUpdate.bind(this)
-  }
-
-  resetVideo() {
-    this.setState({isVisible: false})
+    this.playlistFinished = this.playlistFinished.bind(this)
   }
 
   doUpdate(changedProjects) {
-    console.log(changedProjects)
-    this.setState({changedProjects})
+    this.setState({changedProjects, isVisible: true})
+    this.refs.player.createPlaylistWithProject()
+  }
+
+  playlistFinished() {
+      this.setState({isVisible: false})
   }
 
   render() {
@@ -27,9 +26,10 @@ class App extends Component {
       <div className="App">
         <Timer doUpdate={this.doUpdate} />
         <VideoPlayer 
+            ref="player"
             projects={this.state.changedProjects}
+            playlistFinished={this.playlistFinished}
             isVisible={this.state.isVisible} 
-            videoFinished={this.resetVideo}
           />
       </div>
     );
