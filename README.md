@@ -4,12 +4,12 @@ With Whistle-Men you can watch multiple Git-Hub projets for incoming commits & p
 
 ## Get Started
 
-1. Download or clone this project
-1.1 run ``` git clone https://github.com/JonasBerger/whistle-men.git``` or
-1.2 download with: https://github.com/JonasBerger/whistle-men/archive/master.zip
-1.3 run yarn add //or npm install in project-folder
+**1. Download or clone this project**
+* run ``` git clone https://github.com/JonasBerger/whistle-men.git``` or
+* download with: https://github.com/JonasBerger/whistle-men/archive/master.zip
+* run yarn add //or npm install in project-folder
 
-2. Edit the src/config.js-file
+**2. Edit the src/config.js-file**
 ```javascript 
 export const config = {
 	access_token: "", //create your access-token git->settings->developer-settings-> personal access-tokens
@@ -23,15 +23,12 @@ export const config = {
 	]
 }
 ```
-3. Start running the project
-3.1 yarn build //or npm build
-3.2 if you're going to build, you have to open the index.html via Browser
+**3. Start running the project**
+* yarn build //or npm build
+* if you're going to build, you have to open the index.html via Browser
 
 ## Adding Custom Videos
 1. Put your Videos in `public/videos`
-2. Rename them to videoFilename (src/config.js) + next number
-2.2. e.g. you got video1.mp4 next would be video2.mp4
-3. edit in src/config.js the `numberOfVideos`
-3.1. in our example we would have video1 and video2
-4 rebuild project, or start project 
-4.1. if you already on Dev-Server all should be fine
+2. Rename them to videoFilename (src/config.js) + next number(e.g. you got video1.mp4 next would be video2.mp4)
+3. edit in src/config.js the `numberOfVideos` (in our example we would have video1 and video2)
+4 rebuild project, or start project(if you already on a running Dev-Server all should be fine)
