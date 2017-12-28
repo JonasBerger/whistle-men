@@ -1,6 +1,6 @@
 # Whistle-Men
-
-With Whistle-Men you can watch multiple Git-Hub projets for incoming commits & put Videos to a folder to randomly play when commit arrives!
+![alt text](https://github.com/JonasBerger/whistle-men/blob/master/whistle-men.png?raw=true "Whistle-Men")
+With Whistle-Men you can watch multiple Git-Hub projets for incoming commits & put videos to a folder to randomly play when commit arrives!
 
 ## Get Started
 
