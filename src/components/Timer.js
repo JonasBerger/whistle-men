@@ -11,7 +11,7 @@ export default class Timer extends React.Component {
 
 	componentDidMount(){
 		const projectUrls = buildFetchUrls()
-		setInterval(() => this.onUpdate(projectUrls), config.interval*10000)
+		setInterval(() => this.onUpdate(projectUrls), config.interval*1000*60)
 	}
 
 	onUpdate(projectUrls){

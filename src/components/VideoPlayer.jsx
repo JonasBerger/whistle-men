@@ -1,12 +1,11 @@
 import React from 'react'
 import {config} from '../config'
-import MessageBanner from './MessageBanner'
 
 export default class VideoPlayer extends React.Component {
 	constructor(props){
 		super(props)
 		this.playlistFinished = this.playlistFinished.bind(this)
-		this.state = {changeSize: 0,  currentProject: {commit: {sha:'', commit:{message: ''}, author: {login: ''}}}}
+		this.state = {changeSize: 0}
 	}
 
 	createPlaylistWithProject(){
@@ -15,8 +14,10 @@ export default class VideoPlayer extends React.Component {
 					this.refs.video.load()
 			}
 			const changeSize = this.props.projects.length -1
-			this.setState({changeSize, source: this.shuffleVideos(), currentProject: this.props.projects[changeSize]})
+			const currentProject = this.props.projects[changeSize]
+			this.setState({changeSize, source: this.shuffleVideos(), currentProject})
 			this.refs.video.play()
+			this.props.setMessage(currentProject)
 		}
 	}
 
@@ -43,10 +44,9 @@ export default class VideoPlayer extends React.Component {
 
 	render() {
 		if(!this.props.isVisible){
-			return (<h1>{"Watching for changes!"}</h1>)
+			return null
 		}
 		return (<div>
-				<MessageBanner project={this.state.currentProject}/>
 				<video ref="video" src={this.state.source} onEnded={this.playlistFinished} width="100%">
 				  	Your browser does not support the video tag.
 				</video>
